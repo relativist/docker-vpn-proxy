@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+    openvpn:
+        image:  vpnka
+        container_name: vpnka
+        hostname: vpnka
+        cap_add:
+        - NET_ADMIN
+        - SYS_ADMIN
+        devices:
+        - /dev/net/tun:/dev/net/tun
+        dns:
+        - 8.8.8.8
+        - 8.8.4.4
+        ports:
+            - 3128:3128
+        volumes:
+            - /home/sit/tmp/vpn-proxy/vpns:/vpn
