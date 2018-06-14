@@ -16,15 +16,19 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 VOLUME ["/vpn"]
+WORKDIR /
 
 RUN squid3 -z -F
 
 COPY squid.conf /etc/squid/squid.conf
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY run_vpn.sh /
+RUN chmod +x /run_vpn.sh
 
 EXPOSE 3128
 
 # Set up the command arguments
-CMD ["/usr/bin/supervisord"]
+#CMD ["/usr/bin/supervisord"]
+CMD ./run_vpn.sh
 
 
