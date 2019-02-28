@@ -5,19 +5,15 @@ The container is listening on port 8888. So you can use the container to route o
 
 Download archieve from site vpnbook.com, extract to folder and change config. (fix creds before run)
 
-## BUILD
-docker build --tag=vpnka:latest .
-docker-compose up
+## Start
+1. ./assemble_containter.sh
+
+2. docker-compose up -d
 
 ## Another Way
 docker run -d --rm --cap-add=NET_ADMIN --device /dev/net/tun --name vpner -v /home/sit/tmp/vpn-proxy/vpns:/vpn -p "8888:3128" --dns=8.8.4.4 --dns=8.8.8.8 tsari/openvpn
 
 docker exec -d vpner openvpn --cd /vpn --config /vpn/vpnbook-fr1-udp53.ovpn --auth-user-pass creds.txt --management localhost 9999
-
-So it's easily to run: 
-
-./create_docker_vpn_proxy.sh
-
 
 ## Verify IP ADDRESS
 wget -e use_proxy=yes -e http_proxy=localhost:8888  -qO- http://ipecho.net/plain ; echo
