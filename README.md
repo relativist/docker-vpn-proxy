@@ -5,7 +5,8 @@ The container is listening on port 8888. So you can use the container to route o
 
 Download archieve from site vpnbook.com, extract to folder and change config. (fix creds before run)
 
-## Start
+# Start
+Requirements: yad, docker, docker-compose, unzip, wget 
 1. ./assemble_containter.sh
 
 2. docker-compose up -d
