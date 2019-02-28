@@ -6,6 +6,7 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     apt-get install --no-install-recommends -qqy \
         openvpn \
         python \
+        iptables \
         squid \
         squidview \
         supervisor \
@@ -16,19 +17,22 @@ RUN export DEBIAN_FRONTEND='noninteractive' && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 VOLUME ["/vpn"]
-WORKDIR /
+RUN mkdir -p /opt/proxy_vpn
+WORKDIR /opt/proxy_vpn
 
-RUN squid3 -z -F
+
 
 COPY squid.conf /etc/squid/squid.conf
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY run_vpn.sh /
-RUN chmod +x /run_vpn.sh
+
+COPY run_vpn.sh /opt/proxy_vpn
+COPY certificates/$VPN_FILE_NAME /opt/proxy_vpn
+COPY certificates/creds.txt /opt/proxy_vpn
+
+RUN squid3 -z -F
+RUN chmod +x run_vpn.sh
 
 EXPOSE 3128
 
-# Set up the command arguments
-#CMD ["/usr/bin/supervisord"]
 CMD ./run_vpn.sh
 
 

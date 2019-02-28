@@ -16,11 +16,6 @@ services:
         ports:
             - 8888:3128
         volumes:
-            - /home/sit/tmp/vpn-proxy/vpns:/vpn
+            - /home/rest/vpn-proxy/vpns:/vpn
         environment:
-            - VPN_FILE=vpnbook-ca1-udp53.ovpn
-            #- VPN_FILE=vpnbook-de233-udp53.ovpn
-            #- VPN_FILE=vpnbook-euro1-udp53.ovpn
-            #- VPN_FILE=vpnbook-fr1-udp53.ovpn
-            #- VPN_FILE=vpnbook-us1-udp53.ovpn
-            #- VPN_FILE=vpnbook-us2-udp53.ovpn
+            - VPN_FILE_NAME=vpnbook-fr1-udp53.ovpn
