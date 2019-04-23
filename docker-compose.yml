@@ -5,7 +5,7 @@ services:
         image:  vpnka
         container_name: vpnka
         hostname: vpnka
-        restart: 'no'
+        restart: 'always'
         cap_add:
         - NET_ADMIN
         - SYS_ADMIN
