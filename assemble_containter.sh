@@ -27,15 +27,18 @@ echo "vpnbook" > creds.txt
 
 #echo $answer >> creds.txt
 password_twitter=$(wget -q -O - https://twitter.com/vpnbook | xmllint --html --xpath '//*[@id="stream-item-tweet-1120412018769575943"]/div[1]/div[2]/div[2]/p/text()' - 2>/dev/null | awk -F: '{print $3}' | tr -d ' ')
-#echo "zthc27c" >> creds.txt
-echo $password_twitter >> creds.txt
+
+
+echo "New password: "
+echo $password_twitter
+#echo $password_twitter >> creds.txt
+echo "35nc62b" >> creds.txt
 
 #3. assemble docker image with name vpnka
 cd ../
 docker build -f Dockerfile --tag=vpnka:latest .
 
 #4. calculate docker-compose.yml
-
 
 #docker exec -it vpnka bash
 #docker run -it retriever bash

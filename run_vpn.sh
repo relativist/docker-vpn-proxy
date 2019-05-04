@@ -21,8 +21,10 @@ new_ip=$(curl ifconfig.me)
 echo "-------------------------------------"
 echo "NEW IP : "$new_ip
 echo "-------------------------------------"
-if [ $old_ip == $new_ip ]
-then
+old_ip=$(echo $old_ip | sed 's/[^0-9]//g')
+new_ip=$(echo $new_ip | sed 's/[^0-9]//g')
+
+if [ "${old_ip}" -eq "${new_ip}" ]; then
 	echo "FAIL!"
 else
 	echo "SUCCESS!"
